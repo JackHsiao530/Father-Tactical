@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Mode } from '../App';
 import FrontlineMode from './FrontlineMode';
 import CampfireMode from './CampfireMode';
+import frontlineBg from '../assets/frontline_bg.png';
+import campfireBg from '../assets/campfire_bg.png';
 
 interface MainInterfaceProps {
   initialMode: Mode;
@@ -12,7 +14,7 @@ export default function MainInterface({ initialMode }: MainInterfaceProps) {
   const [mode, setMode] = useState<Mode>(initialMode);
 
   return (
-    <div className="relative h-screen w-full overflow-hidden flex flex-col bg-black">
+    <div className="fixed inset-0 overflow-hidden flex flex-col bg-black">
       {/* Background Transition */}
       <AnimatePresence initial={false}>
         {mode === 'frontline' ? (
@@ -26,7 +28,7 @@ export default function MainInterface({ initialMode }: MainInterfaceProps) {
           >
             <div 
               className="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-luminosity"
-              style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1507499036636-f716246c2c23?q=80&w=2069&auto=format&fit=crop")' }}
+              style={{ backgroundImage: `url(${frontlineBg})` }}
             />
             <div className="absolute inset-0 bg-zinc-950/80" />
             <div className="absolute inset-0 bg-noise opacity-10 mix-blend-overlay pointer-events-none" />
@@ -43,7 +45,7 @@ export default function MainInterface({ initialMode }: MainInterfaceProps) {
           >
             <div 
               className="absolute inset-0 bg-cover bg-center opacity-30"
-              style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1470246973918-29a93221c455?q=80&w=2000&auto=format&fit=crop")' }}
+              style={{ backgroundImage: `url(${campfireBg})` }}
             />
             <div className="absolute inset-0 bg-stone-950/80" />
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-black/90 pointer-events-none" />

@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Shield, Flame } from 'lucide-react';
 import { Mode } from '../App';
+import frontlineBg from '../assets/frontline_bg.png';
+import campfireBg from '../assets/campfire_bg.png';
 
 interface LandingProps {
   onSelectMode: (mode: Mode) => void;
@@ -20,7 +22,7 @@ export default function Landing({ onSelectMode }: LandingProps) {
   };
 
   return (
-    <div className="flex flex-row h-screen w-full overflow-hidden font-sans bg-black relative">
+    <div className="flex flex-row fixed inset-0 overflow-hidden font-sans bg-black">
       
       {/* App Title & Onboarding Description */}
       <motion.div 
@@ -56,7 +58,7 @@ export default function Landing({ onSelectMode }: LandingProps) {
 
       {/* Left Side: Frontline Mode */}
       <motion.div
-        className={`flex flex-col items-center justify-center relative overflow-hidden ${selected && selected !== 'frontline' ? 'pointer-events-none' : 'cursor-pointer group'}`}
+        className={`flex flex-col h-full w-full items-center justify-center relative overflow-hidden ${selected && selected !== 'frontline' ? 'pointer-events-none' : 'cursor-pointer group'}`}
         initial={{ flex: 1, opacity: 1 }}
         animate={{ 
           flex: selected === 'frontline' ? 100 : (selected === 'campfire' ? 0.0001 : 1),
@@ -70,7 +72,7 @@ export default function Landing({ onSelectMode }: LandingProps) {
         <div 
           className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 mix-blend-luminosity"
           style={{ 
-            backgroundImage: 'url("https://images.unsplash.com/photo-1507499036636-f716246c2c23?q=80&w=2069&auto=format&fit=crop")',
+            backgroundImage: `url(${frontlineBg})`,
             opacity: selected === 'frontline' ? 0.8 : 0.4 
           }}
         />
@@ -105,7 +107,7 @@ export default function Landing({ onSelectMode }: LandingProps) {
 
       {/* Right Side: Campfire Mode */}
       <motion.div
-        className={`flex flex-col items-center justify-center relative overflow-hidden ${selected && selected !== 'campfire' ? 'pointer-events-none' : 'cursor-pointer group'}`}
+        className={`flex flex-col h-full w-full items-center justify-center relative overflow-hidden ${selected && selected !== 'campfire' ? 'pointer-events-none' : 'cursor-pointer group'}`}
         initial={{ flex: 1, opacity: 1 }}
         animate={{ 
           flex: selected === 'campfire' ? 100 : (selected === 'frontline' ? 0.0001 : 1),
@@ -119,7 +121,7 @@ export default function Landing({ onSelectMode }: LandingProps) {
         <div 
           className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
           style={{ 
-            backgroundImage: 'url("https://images.unsplash.com/photo-1470246973918-29a93221c455?q=80&w=2000&auto=format&fit=crop")',
+            backgroundImage: `url(${campfireBg})`,
             opacity: selected === 'campfire' ? 0.8 : 0.3 
           }}
         />
