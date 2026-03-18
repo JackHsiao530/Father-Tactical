@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useMotionValue, useTransform } from 'motion/react';
+import { RefreshCw } from 'lucide-react';
 import { Mode } from '../App';
 import FrontlineMode from './FrontlineMode';
 import CampfireMode from './CampfireMode';
@@ -8,10 +9,16 @@ import campfireBg from '../assets/campfire_bg.png';
 
 interface MainInterfaceProps {
   initialMode: Mode;
+  onReset: () => void;
 }
 
-export default function MainInterface({ initialMode }: MainInterfaceProps) {
+export default function MainInterface({ initialMode, onReset }: MainInterfaceProps) {
   const [mode, setMode] = useState<Mode>(initialMode);
+  
+  // 動態綁定下拉距離
+  const y = useMotionValue(0);
+  const indicatorOpacity = useTransform(y, [0, 40, 120], [0, 0.4, 1]);
+  const iconRotate = useTransform(y, [0, 150], [0, 180]);
 
   return (
     <div className="fixed inset-0 overflow-hidden flex flex-col bg-black">
@@ -53,10 +60,34 @@ export default function MainInterface({ initialMode }: MainInterfaceProps) {
         )}
       </AnimatePresence>
 
-      {/* Content Area */}
-      <div className="relative z-10 flex-1 overflow-hidden">
-        <AnimatePresence mode="wait">
-          {mode === 'frontline' ? (
+      {/* Pull to refresh background indicator */}
+      <motion.div 
+        style={{ opacity: indicatorOpacity }}
+        className="absolute top-16 w-full flex justify-center z-0"
+      >
+        <div className="text-stone-300 drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]">
+          <motion.div style={{ rotate: iconRotate }}>
+            <RefreshCw size={28} />
+          </motion.div>
+        </div>
+      </motion.div>
+
+      {/* Content Area Wrapper for Swipe */}
+      <motion.div 
+        className="relative z-10 flex-1 flex flex-col h-full overflow-hidden"
+        style={{ y }}
+        drag="y"
+        dragConstraints={{ top: 0, bottom: 0 }}
+        dragElastic={{ top: 0, bottom: 0.5 }}
+        onDragEnd={(e, info) => {
+          if (info.offset.y > 150) {
+            onReset();
+          }
+        }}
+      >
+        <div className="relative flex-1 overflow-hidden">
+          <AnimatePresence mode="wait">
+            {mode === 'frontline' ? (
             <FrontlineMode key="frontline" />
           ) : (
             <CampfireMode key="campfire" />
@@ -91,6 +122,7 @@ export default function MainInterface({ initialMode }: MainInterfaceProps) {
           </span>
         </div>
       </div>
+      </motion.div>
     </div>
   );
 }

@@ -27,7 +27,7 @@ export default function App() {
           transition={{ duration: 1 }}
           className="h-screen w-full absolute inset-0 z-0"
         >
-          <MainInterface initialMode={currentMode} />
+          <MainInterface initialMode={currentMode} onReset={() => setCurrentMode(null)} />
         </motion.div>
       )}
     </AnimatePresence>
