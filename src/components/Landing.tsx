@@ -73,10 +73,10 @@ export default function Landing({ onSelectMode }: LandingProps) {
           className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 mix-blend-luminosity"
           style={{ 
             backgroundImage: `url(${frontlineBg})`,
-            opacity: selected === 'frontline' ? 0.8 : 0.4 
+            opacity: selected === 'frontline' ? 1 : 0.6 
           }}
         />
-        <div className={`absolute inset-0 transition-colors duration-1000 ${selected === 'frontline' ? 'bg-[#FF5722]/20' : 'bg-zinc-950/80 group-hover:bg-zinc-950/60'}`} />
+        <div className={`absolute inset-0 transition-colors duration-1000 ${selected === 'frontline' ? 'bg-[#FF5722]/10' : 'bg-zinc-950/60 group-hover:bg-zinc-950/40'}`} />
         <div className="absolute inset-0 bg-noise opacity-10 mix-blend-overlay pointer-events-none" />
         <div className="absolute inset-0 scanlines opacity-20 pointer-events-none" />
         
@@ -122,10 +122,10 @@ export default function Landing({ onSelectMode }: LandingProps) {
           className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
           style={{ 
             backgroundImage: `url(${campfireBg})`,
-            opacity: selected === 'campfire' ? 0.8 : 0.3 
+            opacity: selected === 'campfire' ? 1 : 0.5 
           }}
         />
-        <div className={`absolute inset-0 transition-colors duration-1000 ${selected === 'campfire' ? 'bg-[#FFBF00]/20' : 'bg-stone-950/80 group-hover:bg-stone-950/60'}`} />
+        <div className={`absolute inset-0 transition-colors duration-1000 ${selected === 'campfire' ? 'bg-[#FFBF00]/10' : 'bg-stone-950/60 group-hover:bg-stone-950/40'}`} />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 pointer-events-none" />
         
         <motion.div 

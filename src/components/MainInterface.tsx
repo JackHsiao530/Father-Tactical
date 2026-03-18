@@ -34,10 +34,10 @@ export default function MainInterface({ initialMode, onReset }: MainInterfacePro
             transition={{ duration: 0.8 }}
           >
             <div 
-              className="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-luminosity"
+              className="absolute inset-0 bg-cover bg-center opacity-50 mix-blend-luminosity"
               style={{ backgroundImage: `url(${frontlineBg})` }}
             />
-            <div className="absolute inset-0 bg-zinc-950/80" />
+            <div className="absolute inset-0 bg-zinc-950/60" />
             <div className="absolute inset-0 bg-noise opacity-10 mix-blend-overlay pointer-events-none" />
             <div className="absolute inset-0 scanlines opacity-20 pointer-events-none" />
           </motion.div>
@@ -51,10 +51,10 @@ export default function MainInterface({ initialMode, onReset }: MainInterfacePro
             transition={{ duration: 0.8 }}
           >
             <div 
-              className="absolute inset-0 bg-cover bg-center opacity-30"
+              className="absolute inset-0 bg-cover bg-center opacity-50"
               style={{ backgroundImage: `url(${campfireBg})` }}
             />
-            <div className="absolute inset-0 bg-stone-950/80" />
+            <div className="absolute inset-0 bg-stone-950/60" />
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-black/90 pointer-events-none" />
           </motion.div>
         )}
